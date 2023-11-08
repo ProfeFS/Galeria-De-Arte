@@ -18,8 +18,6 @@ public class ArtworkServiceImpl implements ArtworkService {
 	ArtworkDTO ar3 = new ArtworkDTO(3, "Titulo3", "hola soy la descripción tres", 1);
 	ArtworkDTO ar4 = new ArtworkDTO(4, "Titulo4", "hola soy la descripción cuatro", 3);
 
-	int cont;
-
 	@Autowired
 	ArtistService artistService;
 
@@ -27,8 +25,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 		obras.add(ar);
 		obras.add(ar2);
 		obras.add(ar3);
-		obras.add(ar4);
-		cont = obras.size();
+		obras.add(ar4);		
 	}
 
 	@Override
@@ -41,10 +38,11 @@ public class ArtworkServiceImpl implements ArtworkService {
 	public void createArtwork(ArtworkDTO artworkDTO) {
 
 		if (artistService.getArtistById(artworkDTO.getArtistId()) != null) {
-			ArtworkDTO artwork = new ArtworkDTO(cont++, artworkDTO.getTitle(), artworkDTO.getDescription(),
+			ArtworkDTO artwork = new ArtworkDTO(artworkDTO.getId(), artworkDTO.getTitle(), artworkDTO.getDescription(),
 					artworkDTO.getArtistId());
 			
 			obras.add(artwork);
+			
 
 		} else {
 			throw new ArtworkCreationException(
